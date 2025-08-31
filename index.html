@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<title>TESTE DE PAIXÃO MINISTERIAL</title>
+<style>
+  :root {
+    --purple-light: #a892d1;
+    --purple-medium: #7b63b5;
+    --purple-dark: #5b3a8a;
+    --background: #f9f7fc;
+    --text-dark: #2c1e4f;
+    --text-medium: #4a3a6a;
+    --text-light: #775f9f;
+    --focus-outline: #8e7cc3;
+    --input-bg: #f4f1fa;
+    --border-color: #b5aee2;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: var(--background);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+  h1 {
+    color: var(--purple-dark);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 0.25em;
+    text-align: center;
+    text-shadow: 0 0 3px var(--purple-light);
+  }
+  h2 {
+    color: var(--purple-medium);
+    font-weight: 600;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  p.instructions {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--text-medium);
+    max-width: 720px;
+    margin-bottom: 1.2rem;
+    white-space: pre-line;
+  }
+  form {
+    width: 100%;
+    max-width: 720px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem 2rem 2rem;
+    box-shadow: 0 3px 12px rgba(91, 58, 138, 0.3);
+  }
+  label {
+    font-weight: 600;
+    color: var(--purple-dark);
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+  }
+  textarea, input[type="text"] {
+    width: 100%;
+    font-family: inherit;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-dark);
+    resize: vertical;
+    min-height: 3.2em;
+    transition: border-color 0.3s ease;
+  }
+  textarea {
+    min-height: 7em;
+  }
+  textarea.short-textarea {
+    min-height: 3.5em;
+    max-height: 5em;
+    resize: vertical;
+  }
+  textarea:focus, input[type="text"]:focus {
+    border-color: var(--focus-outline);
+    outline-offset: 2px;
+    outline-style: solid;
+    outline-color: var(--focus-outline);
+  }
+  fieldset {
+    border: none;
+    margin-bottom: 1.4rem;
+    padding: 0;
+  }
+  legend {
+    font-weight: 600;
+    color: var(--purple-medium);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 0.6rem;
+    padding-left: 0.2rem;
+  }
+  .checkbox-group, .checkbox-group.two-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 1.2rem;
+  }
+  @media (min-width: 440px) {
+    .checkbox-group.two-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .checkbox-group label {
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-medium);
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  input[type="checkbox"] {
+    accent-color: var(--purple-medium);
+    cursor: pointer;
+    width: 1.2em;
+    height: 1.2em;
+  }
+  button#resetBtn {
+    display: block;
+    margin: 2rem auto 0;
+    background-color: var(--purple-medium);
+    border: none;
+    border-radius: 24px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.65rem 2.4rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(123, 99, 181, 0.6);
+    transition: background-color 0.3s ease;
+  }
+  button#resetBtn:hover,
+  button#resetBtn:focus {
+    background-color: var(--purple-dark);
+  }
+  button#resetBtn:focus {
+    outline-offset: 3px;
+    outline-color: var(--focus-outline);
+    outline-style: solid;
+  }
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--purple-medium);
+    line-height: 1.3;
+  }
+  footer a {
+    color: var(--purple-dark);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer a:hover,
+  footer a:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+  .small-text {
+    font-size: 0.9rem;
+    color: var(--purple-medium);
+  }
+  .inline-space {
+    display: block;
+    font-family: monospace, monospace;
+    letter-spacing: 0.15ch;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding: 0.3em 0.5em;
+    border: 1.4px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-dark);
+    font-size: clamp(0.9rem, 1.7vw, 1rem);
+    margin-top: 0.4rem;
+  }
+  .line-break {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+  <h1>TESTE DE PAIXÃO MINISTERIAL</h1>
+  <section aria-labelledby="instructions-header">
+    <h2 id="instructions-header">Instruções</h2>
+    <p class="instructions">1. Ore enquanto considera as questões.<br />
+2. Responda sozinho.<br />
+3. Não há respostas certas ou erradas.<br />
+4. Não se preocupe com “se” você pode ou não concretizar sua paixão, nem com “como” isso pode ser feito. Complete o questionário como se não houvesse nenhum obstáculo para a sua atuação nesta área de paixão.</p>
+  </section>
+  <form id="paixaoForm" autocomplete="off" novalidate aria-describedby="finalExplanation">
+    <fieldset>
+      <label for="q1">1. Se eu pudesse fazer algo para o Reino de Deus sabendo que não daria errado, o que faria?</label>
+      <textarea id="q1" name="q1" maxlength="500" placeholder="Responda aqui (máx. 500 caracteres)" aria-required="true"></textarea>
+    </fieldset>
+    <fieldset>
+      <label for="q2">2. No fim da minha vida, gostaria de olhar para trás e saber que fiz algo acerca de</label>
+      <textarea id="q2" name="q2" maxlength="500" placeholder="Responda aqui (máx. 500 caracteres)" aria-required="true"></textarea>
+    </fieldset>
+    <fieldset>
+      <label for="q3">3. O que eu mais gostaria de fazer para outras pessoas é</label>
+      <textarea id="q3" name="q3" maxlength="500" placeholder="Responda aqui (máx. 500 caracteres)" aria-required="true"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>4. As pessoas que eu mais gostaria de ajudar são:</legend>
+      <div class="checkbox-group two-columns" role="group" aria-labelledby="pessoas-group">
+        <label><input type="checkbox" name="pessoas" value="Bebês" /> Bebês</label>
+        <label><input type="checkbox" name="pessoas" value="Crianças" /> Crianças</label>
+        <label><input type="checkbox" name="pessoas" value="Adolescentes" /> Adolescentes</label>
+        <label><input type="checkbox" name="pessoas" value="Jovens" /> Jovens</label>
+        <label><input type="checkbox" name="pessoas" value="Universitários" /> Universitários</label>
+        <label><input type="checkbox" name="pessoas" value="Idosos" /> Idosos</label>
+        <label><input type="checkbox" name="pessoas" value="Homens" /> Homens</label>
+        <label><input type="checkbox" name="pessoas" value="Mulheres" /> Mulheres</label>
+        <label><input type="checkbox" name="pessoas" value="Pais" /> Pais</label>
+        <label><input type="checkbox" name="pessoas" value="Famílias" /> Famílias</label>
+        <label><input type="checkbox" name="pessoas" value="Mães adolescentes" /> Mães adolescentes</label>
+        <label><input type="checkbox" name="pessoas" value="Mães/pais solteiros" /> Mães/pais solteiros</label>
+        <label><input type="checkbox" name="pessoas" value="Divorciados" /> Divorciados</label>
+        <label><input type="checkbox" name="pessoas" value="Recém-casados" /> Recém-casados</label>
+        <label><input type="checkbox" name="pessoas" value="Casais maduros" /> Casais maduros</label>
+        <label><input type="checkbox" name="pessoas" value="Viúvos" /> Viúvos</label>
+        <label><input type="checkbox" name="pessoas" value="Presidiários" /> Presidiários</label>
+        <label><input type="checkbox" name="pessoas" value="Dependentes químicos" /> Dependentes químicos</label>
+        <label><input type="checkbox" name="pessoas" value="Refugiados" /> Refugiados</label>
+        <label><input type="checkbox" name="pessoas" value="Pobres" /> Pobres</label>
+        <label><input type="checkbox" name="pessoas" value="Pessoas em situação de rua" /> Pessoas em situação de rua</label>
+        <label><input type="checkbox" name="pessoas" value="Desempregados" /> Desempregados</label>
+        <label><input type="checkbox" name="pessoas" value="Empreendedores" /> Empreendedores</label>
+        <label><input type="checkbox" name="pessoas" value="Pessoas com deficiência física" /> Pessoas com deficiência física</label>
+        <label><input type="checkbox" name="pessoas" value="Pessoas com deficiência mental" /> Pessoas com deficiência mental</label>
+        <label><input type="checkbox" name="pessoas" value="Hospitalizados" /> Hospitalizados</label>
+        <label><input type="checkbox" name="pessoas" value="Descrentes" /> Descrentes</label>
+        <label><input type="checkbox" name="pessoas" value="Outros:" /> Outros:</label>
+      </div>
+      <textarea id="pessoasOutros" name="pessoasOutros" maxlength="500" placeholder="Se marcou 'Outros', especifique aqui" style="margin-top:0.5rem;"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>5. Os seguintes assuntos causam em mim opiniões fortes, sentimentos profundos ou desejo de fazer algo a respeito:</legend>
+      <div class="checkbox-group two-columns" role="group" aria-labelledby="assuntos-group">
+        <label><input type="checkbox" name="assuntos" value="Discipulado" /> Discipulado</label>
+        <label><input type="checkbox" name="assuntos" value="Aconselhamento" /> Aconselhamento</label>
+        <label><input type="checkbox" name="assuntos" value="Comunhão dos santos" /> Comunhão dos santos</label>
+        <label><input type="checkbox" name="assuntos" value="Evangelismo" /> Evangelismo</label>
+        <label><input type="checkbox" name="assuntos" value="Educação" /> Educação</label>
+        <label><input type="checkbox" name="assuntos" value="Alfabetização" /> Alfabetização</label>
+        <label><input type="checkbox" name="assuntos" value="Cuidado de crianças" /> Cuidado de crianças</label>
+        <label><input type="checkbox" name="assuntos" value="Família" /> Família</label>
+        <label><input type="checkbox" name="assuntos" value="Aborto" /> Aborto</label>
+        <label><input type="checkbox" name="assuntos" value="Homossexualidade e identidade de gênero" /> Homossexualidade e identidade de gênero</label>
+        <label><input type="checkbox" name="assuntos" value="Política" /> Política</label>
+        <label><input type="checkbox" name="assuntos" value="Meio-ambiente" /> Meio-ambiente</label>
+        <label><input type="checkbox" name="assuntos" value="Violência" /> Violência</label>
+        <label><input type="checkbox" name="assuntos" value="Injustiça social" /> Injustiça social</label>
+        <label><input type="checkbox" name="assuntos" value="Racismo" /> Racismo</label>
+        <label><input type="checkbox" name="assuntos" value="Vícios e maus hábitos" /> Vícios e maus hábitos</label>
+        <label><input type="checkbox" name="assuntos" value="Saúde" /> Saúde</label>
+        <label><input type="checkbox" name="assuntos" value="Pobreza" /> Pobreza</label>
+        <label><input type="checkbox" name="assuntos" value="Fome" /> Fome</label>
+        <label><input type="checkbox" name="assuntos" value="Economia" /> Economia</label>
+        <label><input type="checkbox" name="assuntos" value="Tecnologia" /> Tecnologia</label>
+        <label><input type="checkbox" name="assuntos" value="Arte" /> Arte</label>
+        <label><input type="checkbox" name="assuntos" value="Cultura" /> Cultura</label>
+        <label><input type="checkbox" name="assuntos" value="Literatura" /> Literatura</label>
+        <label><input type="checkbox" name="assuntos" value="Outros:" /> Outros:</label>
+      </div>
+      <textarea id="assuntosOutros" name="assuntosOutros" maxlength="500" placeholder="Se marcou 'Outros', especifique aqui" style="margin-top:0.5rem;"></textarea>
+    </fieldset>
+    <fieldset>
+      <label for="q6">6. Liste de duas a três realizações marcantes da sua vida e descreva brevemente por que elas foram significativas para você.<br />
+        • Elas podem ter ocorrido em casa, no trabalho, na escola, na igreja ou no lazer.<br />
+        • Pode ser um objeto que consertou, uma roupa que costurou, um jogo de que participou, um prêmio que recebeu, uma manifestação em que se envolveu, uma ajuda a alguém necessitado etc.<br />
+        • Lembre-se de que foram experiências positivas que o fizeram sentir-se realizado, cumprindo seu propósito.
+      </label>
+      <textarea id="q6" name="q6" maxlength="500" placeholder="Responda aqui (máx. 500 caracteres)" aria-required="true"></textarea>
+    </fieldset>
+
+    <section id="thematic-common" aria-label="Anotação temática comum" style="margin-bottom: 1.4rem; color: var(--purple-dark)">
+      <p>Em seguida, leia o que escreveu e procure uma temática comum.<br />
+      Se um ou dois temas se destacarem, anote-os.<br />
+      Procure identificar se eles indicam algo a respeito de sua paixão ministerial.</p>
+      <textarea id="thematicNotes" name="thematicNotes" maxlength="200" placeholder="Anote a temática comum aqui (máx. 200 caracteres)" class="short-textarea" aria-label="Campo para anotação de temática comum"></textarea>
+    </section>
+
+    <section id="finalExplanation" tabindex="0" aria-label="Conclusão do teste" style="margin-top:2rem; color: var(--purple-dark); font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.4;">
+      <p><strong>7. CONCLUSÃO:</strong><br />
+        Para identificar sua paixão ministerial e sanar possíveis dúvidas, procure padrões nas respostas anteriores.<br />
+        Por exemplo:<br />
+        • Você percebe algum assunto predominante?<br />
+        • Uma faixa etária se destaca mais?<br />
+        • Você está desempenhando o mesmo papel em várias situações?<br />
+        • Quais preocupações e desafios você prioriza?<br />
+        Quais mais chamam sua atenção?<br />
+        <br />
+        Baseado em minhas respostas, penso que a área na qual eu poderia contribuir significativamente é:
+      </p>
+      <p><textarea maxlength="100" placeholder="Preencha aqui (máx. 100 caracteres)" style="width:100%; font-size:1rem; padding:0.5em 0.75em; border-radius:6px; border: 1.5px solid var(--border-color); background-color: var(--input-bg); color: var(--text-dark);" aria-label="Campo para preenchimento de área de contribuição"></textarea></p>
+      <p><strong>Diante disso, sinto que tenho PAIXÃO por:</strong></p>
+      <p><textarea maxlength="100" placeholder="Preencha aqui (máx. 100 caracteres)" style="width:100%; font-size:1rem; padding:0.5em 0.75em; border-radius:6px; border: 1.5px solid var(--border-color); background-color: var(--input-bg); color: var(--text-dark);" aria-label="Campo para preenchimento de paixão ministerial"></textarea></p>
+    </section>
+
+    <section id="group-activity" tabindex="0" aria-label="Atividade em grupo: Clareando minha paixão" style="margin-top:2.5rem; color: var(--purple-dark); font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.4;">
+      <strong>Atividade em grupo: Clareando minha paixão</strong><br /><br />
+      Se tiver oportunidade, una-se a outras pessoas que fizeram o teste individual e realize o seguinte teste adicional em grupo para clarear ainda mais sua paixão ministerial.<br />
+      Forme um grupo de 4 a 6 pessoas e siga os passos a seguir:<br /><br />
+      1. Cada pessoa deve explicar sua paixão.<br /><br />
+      2. Conversem sobre as paixões uns dos outros, a fim de ajudar cada pessoa a compreendê-las melhor.<br />
+      Façam perguntas, conheçam-se e descubram detalhes a respeito desse desejo.<br /><br />
+      3. Cada um deve anotar palavras ou frases-chave que esclarecem sua paixão.<br /><br />
+      Exemplos:<br /><br />
+      “Tenho preferência por servir com <strong>CRIANÇAS pequenas/órfãs/de comportamento difícil/que sofreram abuso físico ou psicológico/com deficiência</strong>”.<br /><br />
+      “Tenho uma paixão por <strong>ALCANÇAR OS PERDIDOS</strong> de forma geral/no bairro/em situação de pobreza/no trabalho/jovens”.<br /><br />
+      4. Por meio desse exercício, defina sua paixão.<br />
+      Isso o permitirá identificar ONDE servir.
+    </section>
+
+    <button type="button" id="resetBtn" aria-label="Recomeçar o teste">Recomeçar o teste</button>
+  </form>
+  <footer>
+    <div>Digitalizado por <a href="https://www.instagram.com/rafaelrfg" target="_blank" rel="noopener noreferrer" tabindex="0">@rafaelrfg</a></div>
+    <div>Igreja Batista do Calvário - Teresina - Pi</div>
+  </footer>
+
+<script>
+  const form = document.getElementById('paixaoForm');
+  const resetBtn = document.getElementById('resetBtn');
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+  });
+</script>
+</body>
+</html>
